@@ -14,9 +14,9 @@ public class Kafkaproducer {
     private final KafkaTemplate<String, String> kafkaTemplate;
 
     public void sendMessage(String msg) {
-        log.info("sending message to consumer: %s ", msg);
+        log.info(String.format("Sending message form randomtopic : %s", msg));
 
-        kafkaTemplate.send("avichal", msg);
+        kafkaTemplate.send("Avichal", msg);
     }
 
 }
