@@ -12,6 +12,7 @@ public class KafkaTopicConfig {
     public NewTopic RandomTopic() {
 
         return TopicBuilder
+
                 .name("order")
                 .build();
 
