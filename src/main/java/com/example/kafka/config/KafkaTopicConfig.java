@@ -10,9 +10,7 @@ public class KafkaTopicConfig {
 
     @Bean
     public NewTopic RandomTopic() {
-
         return TopicBuilder
-
                 .name("order")
                 .build();
 
