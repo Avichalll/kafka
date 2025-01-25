@@ -2,6 +2,7 @@ package com.example.kafka.restcontorller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +23,8 @@ public class MessageController {
 
     private final KafkaJsonProducer kafkaJsonProducer;
 
-    @PostMapping("/msg")
-    public ResponseEntity<String> postMethodName(@RequestBody String messsage) {
+    @PostMapping("/msg/{message}")
+    public ResponseEntity<String> postMethodName(@PathVariable("message") String messsage) {
         kafkaproducer.sendMessage(messsage);
         return new ResponseEntity<>("message send successfully", HttpStatus.OK);
     }

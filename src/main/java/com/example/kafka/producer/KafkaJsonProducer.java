@@ -7,8 +7,6 @@ import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
 import com.example.kafka.payload.Student;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,22 +17,19 @@ import lombok.extern.slf4j.Slf4j;
 public class KafkaJsonProducer {
 
     private final KafkaTemplate<String, Student> kafkaTemplate;
-
-    private final ObjectMapper objectMapper;
+    // private final ObjectMapper objectMapper;
 
     public void sendMessage(Student student) {
-        try {
-            String studentJson = objectMapper.writeValueAsString(student);
-            log.info("Sending message: {}", studentJson);
-            Message<String> message = MessageBuilder
-                    .withPayload(studentJson)
-                    .setHeader(KafkaHeaders.TOPIC, "order")
-                    .build();
+        // try {
+        // String studentJson = objectMapper.writeValueAsString(student);
+        log.info("Sending message: {}", student);
+        Message<Student> message = MessageBuilder
+                .withPayload(student)
+                .setHeader(KafkaHeaders.TOPIC, "order")
+                .build();
 
-            kafkaTemplate.send(message);
-        } catch (JsonProcessingException e) {
-            log.error("Failed to convert student object to JSON", e);
-        }
+        kafkaTemplate.send(message);
+        // }
     }
 
 }
